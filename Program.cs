@@ -37,7 +37,7 @@ namespace P3RSaveViewer {
             var charm = props[5141].Value;
             var courage = props[5143].Value;
 
-            Console.WriteLine(saveName);
+            Console.WriteLine($"{saveName}    {new FileInfo(path).LastWriteTime}");
             Console.WriteLine(new string('=', 64));
             Console.WriteLine($"{firstName} {lastName}\t{lvl} lvl");
             Console.WriteLine($"Playtime: {GetPlayTime(playTime)}");
