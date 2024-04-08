@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using GvasFormat.Serialization.UETypes;
 
@@ -6,7 +6,7 @@ namespace GvasFormat.Serialization
 {
     public static partial class UESerializer
     {
-        internal static UEProperty Deserialize(string name, string type, long valueLength, BinaryReader reader)
+        internal static UEProperty Deserialize(string name, string type, long valueLength, BinaryReader reader, Int32 valueId)
         {
             UEProperty result;
             var itemOffset = reader.BaseStream.Position;
@@ -60,6 +60,7 @@ namespace GvasFormat.Serialization
             }
             result.Name = name;
             result.Type = type;
+            result.ValueId = valueId;
             return result;
         }
 
