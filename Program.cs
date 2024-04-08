@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -36,18 +36,40 @@ namespace P3RSaveViewer {
                 .Where(x => x.Name == "SaveDataArea")
                 .Select((x, i) => new { i, x })
                 .ToDictionary(x => x.i, x => x.x);
-            //var yenIdx = props.FirstOrDefault(x => x.Value.Value == 65618).Key;
-            //var yen = props[yenIdx + 3].Value;
-            var yen = props[397].Value;
-            var skillsIdx = props.FirstOrDefault(x => x.Value.Value == 393312).Key;
-            var academics = (int)props[skillsIdx + 4].Value;
-            var charm = (int)props[skillsIdx + 6].Value;
-            var courage = (int)props[skillsIdx + 8].Value;
+            var yenIdx = props.FirstOrDefault(x => x.Value.ValueId == 7257).Key;
+	    uint yen;
+            if (yenIdx == 0){
+            yen = 0;}
+            else{
+            yen = props[yenIdx].Value;}
+
+            int courage;
+            int academics;
+            int charm;
+	    var skillsValueIdBase= 5352;
+            var skills1Idx = props.FirstOrDefault(x => x.Value.ValueId == (skillsValueIdBase)).Key;
+            var skills2Idx = props.FirstOrDefault(x => x.Value.ValueId == (skillsValueIdBase+2)).Key;
+            var skills3Idx = props.FirstOrDefault(x => x.Value.ValueId == (skillsValueIdBase+4)).Key;
+   
+            if (skills1Idx == 0){
+            academics = 0;}
+            else{
+            academics = (int)props[skills1Idx].Value;}
+
+            if (skills2Idx == 0){
+            charm = 0;}
+            else{
+            charm = (int)props[skills2Idx].Value;}
+
+            if (skills3Idx == 0){
+            courage = 0;}
+            else{
+            courage = (int)props[skills3Idx].Value;}
 
             Console.WriteLine($" File: \"{path}\" [{new FileInfo(path).LastWriteTime}]");
             Console.WriteLine(new string('=', 128));
             Console.WriteLine($"{firstName} {lastName}");
-            //Console.WriteLine($"{yen} Yen");
+            Console.WriteLine($"{yen} Yen");
             Console.WriteLine($"Lv {lvl}");
             //Console.WriteLine($"Lv {lvl} ({exp} EXP)");
             Console.WriteLine($"Play time: {GetPlayTime(playTime ?? 0)}");
