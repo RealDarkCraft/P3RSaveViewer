@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -26,14 +26,14 @@ namespace GvasFormat.Serialization.UETypes
                 if (keyType == "StructProperty")
                     key = Read(reader);
                 else
-                    key = UESerializer.Deserialize(null, keyType, -1, reader);
+                    key = UESerializer.Deserialize(null, keyType, -1, reader,-1);
                 var values = new List<UEProperty>();
                 do
                 {
                     if (valueType == "StructProperty")
                         value = Read(reader);
                     else
-                        value = UESerializer.Deserialize(null, valueType, -1, reader);
+                        value = UESerializer.Deserialize(null, valueType, -1, reader,-1);
                     values.Add(value);
                 } while (!(value is UENoneProperty));
                 Map.Add(new UEKeyValuePair{Key = key, Values = values});
