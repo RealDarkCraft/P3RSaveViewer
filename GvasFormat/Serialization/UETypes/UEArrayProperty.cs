@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.IO;
 
@@ -31,7 +31,7 @@ namespace GvasFormat.Serialization.UETypes
                 default:
                 {
                     for (var i = 0; i < count; i++)
-                        Items[i] = UESerializer.Deserialize(null, ItemType, -1, reader);
+                        Items[i] = UESerializer.Deserialize(null, ItemType, -1, reader,-1);
                     break;
                 }
             }
